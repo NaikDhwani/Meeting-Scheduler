@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:padding="@dimen/app_padding"
+    android:background="@color/appBackground">
+
+    <EditText
+        style="@style/EditTextTheme"
+        android:layout_centerInParent="true"
+        android:hint="Enter Login Key"
+        android:gravity="center"
+        android:id="@+id/loginKeyEditText"
+        android:background="@drawable/edit_text_background"
+        android:inputType="textPassword"/>
+
+    <TextView
+        style="@style/TextViewTheme"
+        android:layout_above="@id/loginKeyEditText"
+        android:text="Member and Meeting\n\nManagement\n\nLogin"
+        android:gravity="center"
+        android:layout_marginBottom="20dp"/>
+
+</RelativeLayout>

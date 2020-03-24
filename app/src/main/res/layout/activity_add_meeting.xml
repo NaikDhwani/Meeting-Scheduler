@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddMeetingActivity"
+    android:background="@color/appBackground"
+    android:padding="@dimen/app_padding">
+
+    <TextView
+        style="@style/TextViewTheme"
+        android:text="Schedule New Meeting"
+        android:gravity="center"
+        android:id="@+id/title"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_above="@id/buttons">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                style="@style/EditTextTheme"
+                android:layout_width="match_parent"
+                android:background="@drawable/edit_text_background"
+                android:hint="Title"
+                android:layout_marginBottom="@dimen/app_padding"/>
+
+            <EditText
+                style="@style/EditTextTheme"
+                android:layout_width="match_parent"
+                android:background="@drawable/edit_text_background"
+                android:hint="Select Committee"
+                android:layout_marginBottom="@dimen/app_padding"/>
+
+            <EditText
+                style="@style/EditTextTheme"
+                android:background="@drawable/edit_text_background"
+                android:hint="Address"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/app_padding2"
+                android:layout_marginTop="@dimen/app_padding2">
+
+                <EditText
+                    style="@style/EditTextTheme"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edit_text_background"
+                    android:hint="Zip"
+                    android:layout_marginRight="3dp"/>
+
+                <EditText
+                    style="@style/EditTextTheme"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edit_text_background"
+                    android:hint="City"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/app_padding">
+
+                <EditText
+                    style="@style/EditTextTheme"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edit_text_background"
+                    android:hint="State"
+                    android:layout_marginRight="3dp"/>
+
+                <EditText
+                    style="@style/EditTextTheme"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edit_text_background"
+                    android:hint="Country"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/app_padding">
+
+                <EditText
+                    style="@style/EditTextTheme"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edit_text_background"
+                    android:hint="Date"
+                    android:layout_marginRight="3dp"
+                    android:inputType="textEmailAddress"/>
+
+                <EditText
+                    style="@style/EditTextTheme"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edit_text_background"
+                    android:hint="Time"
+                    android:inputType="phone"/>
+
+            </LinearLayout>
+
+            <EditText
+                style="@style/EditTextTheme"
+                android:background="@drawable/edit_text_background"
+                android:hint="Agenda"
+                android:lines="3"
+                android:gravity="start"
+                android:layout_marginBottom="@dimen/app_padding"/>
+            <EditText
+                style="@style/EditTextTheme"
+                android:background="@drawable/edit_text_background"
+                android:hint="Note"
+                android:lines="3"
+                android:gravity="start"
+                android:layout_marginBottom="@dimen/app_padding2"
+                android:maxLength="100"/>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/buttons"
+        android:layout_alignParentBottom="true">
+        <Button
+            style="@style/ButtonTheme"
+            android:text="Back"
+            android:background="@drawable/button_background"/>
+
+        <Button
+            style="@style/ButtonTheme"
+            android:text="Clear"
+            android:background="@drawable/button_background"/>
+
+        <Button
+            style="@style/ButtonTheme"
+            android:text="Add"
+            android:background="@drawable/button_background"/>
+    </LinearLayout>
+
+</RelativeLayout>

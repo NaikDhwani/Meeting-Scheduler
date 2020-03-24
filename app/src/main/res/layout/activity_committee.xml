@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CommitteeActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:id="@+id/toolbarLayer">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/toolbarLayer"
+        android:id="@+id/searchLayout"
+        android:padding="@dimen/app_padding">
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5">
+            <EditText
+                android:layout_width="250dp"
+                style="@style/EditTextTheme"
+                android:backgroundTint="@color/editText"
+                android:id="@+id/searchEditText"/>
+            <ImageButton
+                style="@style/ImageButtonTheme"
+                android:layout_toRightOf="@id/searchEditText"
+                android:src="@drawable/search_icon"
+                android:background="@color/appBackground"/>
+        </RelativeLayout>
+        <ImageButton
+            style="@style/ImageButtonTheme"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:background="@color/appBackground"
+            android:src="@drawable/add_icon"
+            android:onClick="Add"/>
+    </LinearLayout>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        android:layout_below="@id/searchLayout"
+        android:id="@+id/committeeList"
+        android:padding="@dimen/app_padding2"/>
+
+</RelativeLayout>

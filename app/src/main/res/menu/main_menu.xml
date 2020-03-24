@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/meetingOption"
+        android:title="Meeting"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/memberOption"
+        android:title="Member"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/committeeOption"
+        android:title="Committee"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/loginKeyOption"
+        android:title="Login Key"
+        app:showAsAction="never" />
+</menu>

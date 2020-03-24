@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddMemberActivity"
+    android:background="@color/appBackground"
+    android:padding="@dimen/app_padding">
+
+    <TextView
+        style="@style/TextViewTheme"
+        android:text="Add Member"
+        android:gravity="center"
+        android:id="@+id/title"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_above="@id/buttons">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/app_padding">
+
+            <EditText
+                style="@style/EditTextTheme"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_background"
+                android:hint="First"
+                android:layout_margin="2dp"/>
+
+            <EditText
+                style="@style/EditTextTheme"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_background"
+                android:hint="Middle"
+                android:layout_margin="2dp"/>
+
+            <EditText
+                style="@style/EditTextTheme"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_background"
+                android:hint="Last"
+                android:layout_margin="2dp"/>
+
+        </LinearLayout>
+        <EditText
+            style="@style/EditTextTheme"
+            android:background="@drawable/edit_text_background"
+            android:hint="Address"
+            android:layout_margin="2dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/app_padding2"
+            android:layout_marginTop="@dimen/app_padding2">
+
+            <EditText
+                style="@style/EditTextTheme"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_background"
+                android:hint="Zip"
+                android:layout_margin="2dp"/>
+
+            <EditText
+                style="@style/EditTextTheme"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_background"
+                android:hint="City"
+                android:layout_margin="2dp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/app_padding">
+
+            <EditText
+                style="@style/EditTextTheme"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_background"
+                android:hint="State"
+                android:layout_margin="2dp"/>
+
+            <EditText
+                style="@style/EditTextTheme"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_background"
+                android:hint="Country"
+                android:layout_margin="2dp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/app_padding2">
+
+            <EditText
+                style="@style/EditTextTheme"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_background"
+                android:hint="Email"
+                android:layout_margin="2dp"
+                android:inputType="textEmailAddress"/>
+
+            <EditText
+                style="@style/EditTextTheme"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_background"
+                android:hint="Contact"
+                android:layout_margin="2dp"
+                android:inputType="phone"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                style="@style/EditTextTheme"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_background"
+                android:hint="OfficeContact"
+                android:layout_margin="2dp"
+                android:inputType="phone"/>
+
+            <EditText
+                style="@style/EditTextTheme"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_background"
+                android:hint="ResContact"
+                android:layout_margin="2dp"
+                android:inputType="phone"/>
+
+        </LinearLayout>
+
+        <EditText
+            style="@style/EditTextTheme"
+            android:background="@drawable/edit_text_background"
+            android:hint="Birth Date"
+            android:layout_marginHorizontal="2dp"
+            android:layout_marginVertical="@dimen/app_padding"
+            android:inputType="date"/>
+    </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/buttons"
+        android:layout_alignParentBottom="true">
+        <Button
+            style="@style/ButtonTheme"
+            android:text="Back"
+            android:background="@drawable/button_background"/>
+
+        <Button
+            style="@style/ButtonTheme"
+            android:text="Clear"
+            android:background="@drawable/button_background"/>
+
+        <Button
+            style="@style/ButtonTheme"
+            android:text="Add"
+            android:background="@drawable/button_background"/>
+    </LinearLayout>
+
+</RelativeLayout>
