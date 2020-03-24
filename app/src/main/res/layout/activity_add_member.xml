@@ -163,7 +163,10 @@
             android:hint="Birth Date"
             android:layout_marginHorizontal="2dp"
             android:layout_marginVertical="@dimen/app_padding"
-            android:inputType="date"/>
+            android:inputType="date"
+            android:id="@+id/birthDate"
+            android:focusable="false"
+            android:onClick="OpenDatePicker"/>
     </LinearLayout>
     </ScrollView>
 
@@ -176,7 +179,8 @@
         <Button
             style="@style/ButtonTheme"
             android:text="Back"
-            android:background="@drawable/button_background"/>
+            android:background="@drawable/button_background"
+            android:onClick="Back"/>
 
         <Button
             style="@style/ButtonTheme"

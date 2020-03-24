@@ -101,7 +101,10 @@
                     android:background="@drawable/edit_text_background"
                     android:hint="Date"
                     android:layout_marginRight="3dp"
-                    android:inputType="textEmailAddress"/>
+                    android:inputType="date"
+                    android:id="@+id/meetingDate"
+                    android:focusable="false"
+                    android:onClick="OpenDatePicker"/>
 
                 <EditText
                     style="@style/EditTextTheme"
@@ -109,7 +112,10 @@
                     android:layout_weight="1"
                     android:background="@drawable/edit_text_background"
                     android:hint="Time"
-                    android:inputType="phone"/>
+                    android:inputType="time"
+                    android:focusable="false"
+                    android:id="@+id/meetingTime"
+                    android:onClick="OpenTimePicker"/>
 
             </LinearLayout>
 
