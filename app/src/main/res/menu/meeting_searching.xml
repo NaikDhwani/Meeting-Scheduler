@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/activeOption"
+        android:title="Active Meetings"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/cancelOption"
+        android:title="Cancel Meeting"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/allOption"
+        android:title="All Meetings"
+        app:showAsAction="never" />
+</menu>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ViewMemberActivity"
+    android:padding="@dimen/app_padding"
+    android:background="@color/appBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/searchLayout"
+        android:gravity="center">
+    <AutoCompleteTextView
+        style="@style/EditTextTheme"
+        android:layout_width="0dp"
+        android:layout_weight="4"
+        android:hint="Members"
+        android:id="@+id/searchMember"
+        android:background="@drawable/edit_text_background"
+        android:ems="10"
+        android:dropDownHeight="100dp"/>
+        <ImageButton
+            style="@style/ImageButtonTheme"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:src="@drawable/add_icon"
+            android:background="@color/appBackground"
+            android:onClick="Add"
+            android:id="@+id/addMember"/>
+    </LinearLayout>
+
+    <TextView
+        style="@style/TextViewTheme"
+        android:layout_below="@id/searchLayout"
+        android:text="Committee title"
+        android:gravity="center"
+        android:id="@+id/committeeTitle"/>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/committeeTitle"
+        android:layout_above="@id/back"
+        android:id="@+id/cmList"/>
+
+    <Button
+        style="@style/ButtonTheme"
+        android:layout_width="match_parent"
+        android:background="@drawable/button_background"
+        android:text="Back"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/back"
+        android:onClick="Back"/>
+
+</RelativeLayout>

@@ -1,26 +1,31 @@
 package com.cosc592.meetingscheduler;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class CommitteeListAdapter extends BaseAdapter {
 
     private LayoutInflater layoutInflater;
     private List<CommitteeManagement> committeeList;
-    TextView committeeNameText, instituteNameText;
-    ImageButton editCommittee, deleteCommittee;
+    TextView committeeNameText, departmentText;
+    ImageButton editCommittee, deleteCommittee, viewMember;
+    DatabaseManager dbManager = MainActivity.dbManager;
+    static Context con;
+
 
     public CommitteeListAdapter(Context context, List<CommitteeManagement> committeeList) {
         layoutInflater =LayoutInflater.from(context);
         this.committeeList = committeeList;
+        this.con = context;
     }
 
     @Override
@@ -43,48 +48,50 @@ public class CommitteeListAdapter extends BaseAdapter {
 
             if (convertView == null) {
                 convertView = layoutInflater.inflate(R.layout.committee_list_item, null);
+
                 committeeNameText = convertView.findViewById(R.id.committeeName);
-                instituteNameText = convertView.findViewById(R.id.instituteName);
+                departmentText = convertView.findViewById(R.id.instituteName);
                 editCommittee = convertView.findViewById(R.id.editCommittee);
                 deleteCommittee = convertView.findViewById(R.id.deleteCommittee);
+                viewMember = convertView.findViewById(R.id.viewMember);
+
                 CommitteeManagement committeeManagement = committeeList.get(position);
-                EditButtonHandler editHandler =new EditButtonHandler(position);
-                editCommittee.setOnClickListener(editHandler);
-                DeleteButtonHandler DeleteHandler =new DeleteButtonHandler(position);
-                deleteCommittee.setOnClickListener(DeleteHandler);
+
+                ButtonHandler handler =new ButtonHandler(position);
+                editCommittee.setOnClickListener(handler);
+                deleteCommittee.setOnClickListener(handler);
+                viewMember.setOnClickListener(handler);
+
                 committeeNameText.setText(committeeManagement.getTitle());
-                instituteNameText.setText(committeeManagement.getInstitute_id());
+                departmentText.setText(committeeManagement.getDepartment());
             }else{
                 convertView.getTag();
             }
         return convertView;
     }
 
-    private class EditButtonHandler implements View.OnClickListener{
+    private class ButtonHandler implements View.OnClickListener {
 
-        private  int rowNumber;
+        private int rowNumber;
 
-        public EditButtonHandler(int rowNumber){
+        public ButtonHandler(int rowNumber) {
             this.rowNumber = rowNumber;
         }
 
         @Override
         public void onClick(View v) {
-            Log.d("Row: ",rowNumber+"");
-        }
-    }
-
-    private class DeleteButtonHandler implements View.OnClickListener{
-
-        private  int rowNumber;
-
-        public DeleteButtonHandler(int rowNumber){
-            this.rowNumber = rowNumber;
-        }
-
-        @Override
-        public void onClick(View v) {
-            Log.d("Row: ",rowNumber+"");
+            CommitteeManagement committeeManagement = committeeList.get(rowNumber);
+            if (v.getId() == editCommittee.getId())
+                new CommitteeActivity().Update(committeeManagement.getCommittee_id()+"");
+            else if (v.getId() == deleteCommittee.getId())
+                new CommitteeActivity().showDialogBox(committeeManagement.getCommittee_id()+"");
+            else if(v.getId() == viewMember.getId()){
+                LinkedList<MemberManagement> list = dbManager.showAllMember();
+                if(list.size()>0)
+                    new CommitteeActivity().ViewMember(committeeManagement.getCommittee_id(),committeeManagement.getTitle());
+                else
+                    Toast.makeText(con,"Add Members First",Toast.LENGTH_LONG).show();
+            }
         }
     }
 }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/alive"
+        android:title="Alive Members"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/notAlive"
+        android:title="Not Alive Members"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/all"
+        android:title="All Members"
+        app:showAsAction="never" />
+</menu>

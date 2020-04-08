@@ -1,7 +1,6 @@
 package com.cosc592.meetingscheduler;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,15 +42,18 @@ public class MemberListAdapter extends BaseAdapter {
 
             if (convertView == null) {
                 convertView = layoutInflater.inflate(R.layout.member_list_item, null);
+
                 memberNameText = convertView.findViewById(R.id.memberName);
                 memberIdText = convertView.findViewById(R.id.memberId);
                 editMember = convertView.findViewById(R.id.editMember);
                 deleteMember = convertView.findViewById(R.id.deleteMember);
+
                 MemberManagement memberManagement = memberList.get(position);
-                EditButtonHandler editHandler =new EditButtonHandler(position);
-                editMember.setOnClickListener(editHandler);
-                DeleteButtonHandler DeleteHandler =new DeleteButtonHandler(position);
-                deleteMember.setOnClickListener(DeleteHandler);
+
+                ButtonHandler handler = new ButtonHandler(position);
+                editMember.setOnClickListener(handler);
+                deleteMember.setOnClickListener(handler);
+
                 memberNameText.setText(memberManagement.getFirst_name() + " " + memberManagement.getMiddle_name() + " " + memberManagement.getLast_name());
                 memberIdText.setText(memberManagement.getMemberId());
             }else{
@@ -60,31 +62,21 @@ public class MemberListAdapter extends BaseAdapter {
         return convertView;
     }
 
-    private class EditButtonHandler implements View.OnClickListener{
+    private class ButtonHandler implements View.OnClickListener{
 
         private  int rowNumber;
 
-        public EditButtonHandler(int rowNumber){
+        public ButtonHandler (int rowNumber){
             this.rowNumber = rowNumber;
         }
 
         @Override
         public void onClick(View v) {
-            Log.d("Row: ",rowNumber+"");
-        }
-    }
-
-    private class DeleteButtonHandler implements View.OnClickListener{
-
-        private  int rowNumber;
-
-        public DeleteButtonHandler(int rowNumber){
-            this.rowNumber = rowNumber;
-        }
-
-        @Override
-        public void onClick(View v) {
-            Log.d("Row: ",rowNumber+"");
+            MemberManagement memberManagement = memberList.get(rowNumber);
+            if (v.getId() == editMember.getId())
+                new MemberActivity().Update(memberManagement.getMemberId()+"");
+            else if (v.getId() == deleteMember.getId())
+                new MemberActivity().showDialogBox(memberManagement.getMemberId()+"");
         }
     }
 }

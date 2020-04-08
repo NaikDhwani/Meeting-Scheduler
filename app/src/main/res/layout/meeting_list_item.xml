@@ -22,10 +22,10 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
-            android:text="Date and Time"
+            android:text="Committee Title"
             android:textSize="@dimen/font_size"
             android:textColor="@color/editText"
-            android:id="@+id/meetingDateTime"/>
+            android:id="@+id/committeeTitle"/>
     </LinearLayout>
 
     <ImageButton

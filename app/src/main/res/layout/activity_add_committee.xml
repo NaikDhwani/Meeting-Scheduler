@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddCommitteeActivity"
     android:background="@color/appBackground"
     android:padding="@dimen/app_padding">
 
@@ -24,26 +22,43 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+    <TextView
+        style="@style/TextViewTheme"
+        android:text="Title"
+        android:textSize="15sp"/>
+
     <EditText
         style="@style/EditTextTheme"
         android:background="@drawable/edit_text_background"
         android:hint="Title"
-        android:layout_marginBottom="@dimen/app_padding"/>
+        android:id="@+id/committeeTitle"/>
+
+    <TextView
+        style="@style/TextViewTheme"
+        android:text="Description"
+        android:textSize="15sp"/>
 
     <EditText
         style="@style/EditTextTheme"
         android:background="@drawable/edit_text_background"
         android:hint="Description"
-        android:layout_marginBottom="@dimen/app_padding"
         android:lines="8"
         android:gravity="start"
         android:scrollbars="vertical"
-        android:scrollHorizontally="false"/>
+        android:scrollHorizontally="false"
+        android:id="@+id/committeeDescription"/>
+
+    <TextView
+        style="@style/TextViewTheme"
+        android:text="Department"
+        android:textSize="15sp"/>
+
     <EditText
         style="@style/EditTextTheme"
-        android:hint="Department"
         android:background="@drawable/edit_text_background"
-        android:layout_marginBottom="@dimen/app_padding"/>
+        android:layout_marginBottom="@dimen/app_padding"
+        android:id="@+id/committeeInstitute"
+        android:hint="Department"/>
 
     </LinearLayout>
     </ScrollView>
@@ -57,17 +72,23 @@
         <Button
             style="@style/ButtonTheme"
             android:text="Back"
-            android:background="@drawable/button_background"/>
+            android:background="@drawable/button_background"
+            android:onClick="Back"
+            android:id="@+id/back"/>
 
         <Button
             style="@style/ButtonTheme"
             android:text="Clear"
-            android:background="@drawable/button_background"/>
+            android:background="@drawable/button_background"
+            android:id="@+id/clear"
+            android:onClick="Clear"/>
 
         <Button
             style="@style/ButtonTheme"
             android:text="Add"
-            android:background="@drawable/button_background"/>
+            android:background="@drawable/button_background"
+            android:onClick="Add"
+            android:id="@+id/add"/>
     </LinearLayout>
 
 </RelativeLayout>

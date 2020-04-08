@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddMeetingActivity"
     android:background="@color/appBackground"
     android:padding="@dimen/app_padding">
 
@@ -24,24 +22,43 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <TextView
+                style="@style/TextViewTheme"
+                android:text="Title"
+                android:textSize="15sp"/>
+
             <EditText
                 style="@style/EditTextTheme"
                 android:layout_width="match_parent"
                 android:background="@drawable/edit_text_background"
                 android:hint="Title"
-                android:layout_marginBottom="@dimen/app_padding"/>
+                android:id="@+id/meetingTitle"/>
 
-            <EditText
+            <TextView
+                style="@style/TextViewTheme"
+                android:text="Committee"
+                android:textSize="15sp"/>
+
+            <Spinner
                 style="@style/EditTextTheme"
                 android:layout_width="match_parent"
                 android:background="@drawable/edit_text_background"
-                android:hint="Select Committee"
-                android:layout_marginBottom="@dimen/app_padding"/>
+                android:id="@+id/committeeSpinner"
+                android:padding="0dp"/>
+
+            <TextView
+                style="@style/TextViewTheme"
+                android:text="Address"
+                android:textSize="15sp"/>
 
             <EditText
+                android:id="@+id/address"
                 style="@style/EditTextTheme"
                 android:background="@drawable/edit_text_background"
-                android:hint="Address"/>
+                android:hint="Address"
+                android:maxLines="1"
+                android:scrollHorizontally="true"
+                android:scrollbars="horizontal"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -56,21 +73,23 @@
                     android:layout_weight="1"
                     android:background="@drawable/edit_text_background"
                     android:hint="Zip"
-                    android:layout_marginRight="3dp"/>
+                    android:layout_marginRight="3dp"
+                    android:id="@+id/zipCode"
+                    android:inputType="number"/>
 
                 <EditText
                     style="@style/EditTextTheme"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/edit_text_background"
-                    android:hint="City"/>
+                    android:hint="City"
+                    android:id="@+id/city"/>
 
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="@dimen/app_padding">
+                android:orientation="horizontal">
 
                 <EditText
                     style="@style/EditTextTheme"
@@ -78,29 +97,35 @@
                     android:layout_weight="1"
                     android:background="@drawable/edit_text_background"
                     android:hint="State"
-                    android:layout_marginRight="3dp"/>
+                    android:layout_marginRight="3dp"
+                    android:id="@+id/state"/>
 
                 <EditText
                     style="@style/EditTextTheme"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:background="@drawable/edit_text_background"
-                    android:hint="Country"/>
+                    android:hint="Country"
+                    android:id="@+id/country"/>
 
             </LinearLayout>
+
+            <TextView
+                style="@style/TextViewTheme"
+                android:text="Date and Time"
+                android:textSize="15sp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="@dimen/app_padding">
+                android:orientation="horizontal">
 
                 <EditText
                     style="@style/EditTextTheme"
                     android:layout_width="0dp"
+                    android:layout_marginRight="3dp"
                     android:layout_weight="1"
                     android:background="@drawable/edit_text_background"
                     android:hint="Date"
-                    android:layout_marginRight="3dp"
                     android:inputType="date"
                     android:id="@+id/meetingDate"
                     android:focusable="false"
@@ -119,21 +144,66 @@
 
             </LinearLayout>
 
+            <TextView
+                style="@style/TextViewTheme"
+                android:text="Status"
+                android:textSize="15sp"/>
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="@color/editText"
+                    android:checked="true"
+                    android:enabled="false"
+                    android:text="Active"
+                    style="@style/TextViewTheme"
+                    android:textSize="@dimen/font_size"
+                    android:id="@+id/active"/>
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="@color/editText"
+                    android:enabled="false"
+                    android:text="Cancel"
+                    style="@style/TextViewTheme"
+                    android:textSize="@dimen/font_size"
+                    android:id="@+id/cancel"/>
+            </RadioGroup>
+
+            <TextView
+                style="@style/TextViewTheme"
+                android:text="Agenda"
+                android:textSize="15sp"/>
+
             <EditText
                 style="@style/EditTextTheme"
                 android:background="@drawable/edit_text_background"
                 android:hint="Agenda"
                 android:lines="3"
+                android:maxLines="3"
+                android:scrollbars="vertical"
                 android:gravity="start"
-                android:layout_marginBottom="@dimen/app_padding"/>
+                android:id="@+id/agenda"/>
+            <TextView
+                style="@style/TextViewTheme"
+                android:text="Extra Note"
+                android:textSize="15sp"/>
             <EditText
                 style="@style/EditTextTheme"
                 android:background="@drawable/edit_text_background"
-                android:hint="Note"
+                android:hint="Note (Max 100 Characters)"
                 android:lines="3"
+                android:maxLines="3"
+                android:scrollbars="vertical"
                 android:gravity="start"
                 android:layout_marginBottom="@dimen/app_padding2"
-                android:maxLength="100"/>
+                android:maxLength="100"
+                android:id="@+id/note"/>
         </LinearLayout>
     </ScrollView>
 
@@ -146,17 +216,23 @@
         <Button
             style="@style/ButtonTheme"
             android:text="Back"
-            android:background="@drawable/button_background"/>
+            android:background="@drawable/button_background"
+            android:onClick="Back"
+            android:id="@+id/back"/>
 
         <Button
             style="@style/ButtonTheme"
             android:text="Clear"
-            android:background="@drawable/button_background"/>
+            android:background="@drawable/button_background"
+            android:onClick="Clear"
+            android:id="@+id/clear"/>
 
         <Button
             style="@style/ButtonTheme"
             android:text="Add"
-            android:background="@drawable/button_background"/>
+            android:background="@drawable/button_background"
+            android:id="@+id/add"
+            android:onClick="Add"/>
     </LinearLayout>
 
 </RelativeLayout>

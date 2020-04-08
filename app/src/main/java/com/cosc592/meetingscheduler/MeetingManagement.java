@@ -2,10 +2,10 @@ package com.cosc592.meetingscheduler;
 
 public class MeetingManagement {
 
-    private String committee_id, title, address, city, state, country, data_time, agenda, note;
-    private int meeting_id, zip_code, is_active;
+    private String  title, address, city, state, country, data_time, agenda, note, committeeName;
+    private int committee_id, meeting_id, zip_code, is_active;
 
-    public MeetingManagement(int meeting_id, String committee_id, String title, String address, int zip_code, String city, String state, String country,
+    public MeetingManagement(int committee_id, String title, String address, int zip_code, String city, String state, String country,
                              String data_time, int is_active, String agenda, String note) {
         this.committee_id = committee_id;
         this.title = String.valueOf(title.charAt(0)).toUpperCase() + title.substring(1);
@@ -16,13 +16,37 @@ public class MeetingManagement {
         this.data_time = data_time;
         this.agenda = agenda;
         this.note = note;
-        this.meeting_id = meeting_id;
         this.zip_code = zip_code;
         this.is_active = is_active;
     }
 
-    public String getCommittee_id() {
+    public MeetingManagement(int meeting_id, String title, String name) {
+        this.meeting_id = meeting_id;
+        this.title = title;
+        this.committeeName = name;
+    }
+
+    public MeetingManagement(int meetingId, int committee_id, String address, int zip_code, String city, String state, String country,
+                             String data_time, int is_active, String agenda, String note) {
+        this.committee_id = committee_id;
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.country = country;
+        this.data_time = data_time;
+        this.agenda = agenda;
+        this.note = note;
+        this.zip_code = zip_code;
+        this.is_active = is_active;
+        this.meeting_id = meetingId;
+    }
+
+    public int getCommittee_id() {
         return committee_id;
+    }
+
+    public String getCommitteeName(){
+        return committeeName;
     }
 
     public String getTitle() {

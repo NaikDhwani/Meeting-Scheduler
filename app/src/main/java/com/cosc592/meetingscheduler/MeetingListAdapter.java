@@ -1,7 +1,6 @@
 package com.cosc592.meetingscheduler;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,7 @@ public class MeetingListAdapter extends BaseAdapter {
 
     private LayoutInflater layoutInflater;
     private List<MeetingManagement> meetingList;
-    TextView meetingNameText, meetingDateTimeText;
+    TextView meetingNameText, committeeTitle;
     ImageButton editMeeting, deleteMeeting;
 
     public MeetingListAdapter(Context context, List<MeetingManagement> meetingList) {
@@ -43,48 +42,41 @@ public class MeetingListAdapter extends BaseAdapter {
 
             if (convertView == null) {
                 convertView = layoutInflater.inflate(R.layout.meeting_list_item, null);
+
                 meetingNameText = convertView.findViewById(R.id.meetingName);
-                meetingDateTimeText = convertView.findViewById(R.id.meetingDateTime);
+                committeeTitle = convertView.findViewById(R.id.committeeTitle);
                 editMeeting = convertView.findViewById(R.id.editMeeting);
                 deleteMeeting = convertView.findViewById(R.id.deleteMeeting);
+
                 MeetingManagement meetingManagement = meetingList.get(position);
-                EditButtonHandler editHandler =new EditButtonHandler(position);
-                editMeeting.setOnClickListener(editHandler);
-                DeleteButtonHandler DeleteHandler =new DeleteButtonHandler(position);
-                deleteMeeting.setOnClickListener(DeleteHandler);
+
+                ButtonHandler handler =new ButtonHandler(position);
+                editMeeting.setOnClickListener(handler);
+                deleteMeeting.setOnClickListener(handler);
+
                 meetingNameText.setText(meetingManagement.getTitle());
-                meetingDateTimeText.setText(meetingManagement.getData_time());
+                committeeTitle.setText(meetingManagement.getCommitteeName());
             }else{
                 convertView.getTag();
             }
         return convertView;
     }
 
-    private class EditButtonHandler implements View.OnClickListener{
+    private class ButtonHandler implements View.OnClickListener{
 
         private  int rowNumber;
 
-        public EditButtonHandler(int rowNumber){
+        public ButtonHandler(int rowNumber){
             this.rowNumber = rowNumber;
         }
 
         @Override
         public void onClick(View v) {
-            Log.d("Row: ",rowNumber+"");
-        }
-    }
-
-    private class DeleteButtonHandler implements View.OnClickListener{
-
-        private  int rowNumber;
-
-        public DeleteButtonHandler(int rowNumber){
-            this.rowNumber = rowNumber;
-        }
-
-        @Override
-        public void onClick(View v) {
-            Log.d("Row: ",rowNumber+"");
+            MeetingManagement meetingManagement = meetingList.get(rowNumber);
+            if(v.getId() == R.id.editMeeting)
+                new MeetingActivity().Update(meetingManagement.getMeeting_id());
+            else
+                new MeetingActivity().showDialogBox(meetingManagement.getMeeting_id());
         }
     }
 }

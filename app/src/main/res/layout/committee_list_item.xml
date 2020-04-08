@@ -33,8 +33,18 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:background="@color/appBackground"
+        android:src="@drawable/view_member_icon"
+        android:id="@+id/viewMember"
+        android:padding="0dp"/>
+
+    <ImageButton
+        style="@style/ImageButtonTheme"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:background="@color/appBackground"
         android:src="@drawable/edit_icon"
-        android:id="@+id/editCommittee"/>
+        android:id="@+id/editCommittee"
+        android:padding="0dp"/>
 
     <ImageButton
         style="@style/ImageButtonTheme"
@@ -42,6 +52,7 @@
         android:layout_weight="1"
         android:background="@color/appBackground"
         android:src="@drawable/delete_icon"
-        android:id="@+id/deleteCommittee"/>
+        android:id="@+id/deleteCommittee"
+        android:padding="0dp"/>
 
 </LinearLayout>

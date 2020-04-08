@@ -36,12 +36,13 @@
                 android:layout_width="250dp"
                 style="@style/EditTextTheme"
                 android:backgroundTint="@color/editText"
-                android:id="@+id/searchEditText"/>
+                android:id="@+id/searchEditText"
+                android:hint="Search"/>
             <ImageButton
                 style="@style/ImageButtonTheme"
                 android:layout_toRightOf="@id/searchEditText"
                 android:src="@drawable/search_icon"
-                android:background="@color/appBackground"/>
+                android:background="@color/appBackground" />
         </RelativeLayout>
         <ImageButton
             style="@style/ImageButtonTheme"

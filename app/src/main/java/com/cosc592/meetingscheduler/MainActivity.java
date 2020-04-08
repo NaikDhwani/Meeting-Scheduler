@@ -1,21 +1,25 @@
 package com.cosc592.meetingscheduler;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     EditText loginKey;
     LoginManagement loginManagement;
+    public static DatabaseManager dbManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        dbManager = new DatabaseManager(this);
 
         loginManagement = new LoginManagement(this);
 
@@ -24,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         loginKey.addTextChangedListener(handler);
     }
 
-    private class TextChangeHandler implements TextWatcher {
+    private class TextChangeHandler implements TextWatcher{
 
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
@@ -35,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void afterTextChanged(Editable s) {
             if(loginKey.getText().toString().equals(loginManagement.getLoginKey())){
-                Intent keyActivity = new Intent(getApplicationContext(), MeetingActivity.class);
+                Intent keyActivity = new Intent(getApplicationContext(), MemberActivity.class);
                 startActivity(keyActivity);
             }
         }
