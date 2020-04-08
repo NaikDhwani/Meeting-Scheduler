@@ -154,22 +154,46 @@ public class UpdateMeetingActivity extends AppCompatActivity {
                         dbManager.updateMeeting(meetingManagement);
 
                         Toast.makeText(getApplicationContext(),"Updated Successfully",Toast.LENGTH_SHORT).show();
-                        finish();
-                        String idList = dbManager.getAllCommitteeMember(committee_id);
-                        String[] ids = idList.split(",");
-                        String email = "";
-                        for (int i =0; i<ids.length;i++){
-                            if (!ids[i].equals("")) {
-                                if (i == 0)
-                                    email = dbManager.getEmail(ids[i]);
-                                else
-                                    email = email + "," + dbManager.getEmail(ids[i]);
-                            }
-                        }
-                        if (status == 1)
+
+                        /*if (status == 1)
                             sendEmail(email,title, date_of_meeting, time_of_meeting, address,meetingAgenda, meetingNote, "Active");
                         else
-                            sendEmail(email,title, date_of_meeting, time_of_meeting, address,meetingAgenda, meetingNote, "Cancel");
+                            sendEmail(email,title, date_of_meeting, time_of_meeting, address,meetingAgenda, meetingNote, "Cancel");*/
+
+                        try {
+                            String idList = dbManager.getAllCommitteeMember(committee_id);
+                            String[] ids = idList.split(",");
+                            String email = "";
+                            for (int i =0; i<ids.length;i++){
+                                if (!ids[i].equals("")) {
+                                    if (i == 0)
+                                        email = dbManager.getEmail(ids[i]);
+                                    else
+                                        email = email + "," + dbManager.getEmail(ids[i]);
+                                }
+                            }
+
+                            String stat="";
+                            if (status == 1) stat = "Active";
+                            else stat = "Cancel";
+
+                            String body="Dear Member," +
+                                    "%3C%2Fbr%3E" +
+                                    "%3C%2Fbr%3E" +
+                                    "You have a meeting for " + meetingAgenda + "%3C%2Fbr%3E%3C%2Fbr%3E" +
+                                    "Date: " + date_of_meeting + "%3C%2Fbr%3E%3C%2Fbr%3E" +
+                                    "Time: " + time_of_meeting + "%3C%2Fbr%3E%3C%2Fbr%3E" +
+                                    "Address: " + address + "%3C%2Fbr%3E%3C%2Fbr%3E" +
+                                    "Note: " + meetingNote + "%3C%2Fbr%3E%3C%2Fbr%3E" +
+                                    "Status: " + stat + "%3C%2Fbr%3E%3C%2Fbr%3E" +
+                                    "Thank You.";
+                            new BackgroundEmailSenderClass(getApplicationContext(), title +" Meeting Update", body, email).execute(); }
+                        catch (Exception ex) {
+                            Toast.makeText(getApplicationContext(), "Email Not Sent Successfully", Toast.LENGTH_SHORT).show();
+                        }
+
+
+                        finish();
                     }catch (Exception e){
                         Toast.makeText(getApplicationContext(),"Not Updated",Toast.LENGTH_SHORT).show();
                     }
@@ -178,7 +202,7 @@ public class UpdateMeetingActivity extends AppCompatActivity {
         }
     }
 
-    public void sendEmail(String email, String title, String Date, String Time, String Add, String Agenda, String Note, String Status){
+/*    public void sendEmail(String email, String title, String Date, String Time, String Add, String Agenda, String Note, String Status){
         String subject= title + " Meeting Update";
         String body="Dear Member," +
                 "%3C%2Fbr%3E" +
@@ -196,7 +220,7 @@ public class UpdateMeetingActivity extends AppCompatActivity {
         Intent emailIntent = new Intent(Intent.ACTION_VIEW);
         emailIntent.setData(Uri.parse(mailTo));
         startActivity(emailIntent);
-    }
+    }*/
 
     public void OpenDatePicker(View view) {
         closeKeyBoard();

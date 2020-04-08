@@ -1,22 +1,28 @@
 package com.cosc592.meetingscheduler;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.util.Patterns;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.LinkedList;
@@ -31,6 +37,11 @@ public class AddMeetingActivity extends AppCompatActivity {
     boolean notNullCheck;
     static LinkedList<CommitteeMemberManagement> list;
     static CommitteeMemberManagement committeeMemberManagement;
+    EmailManagement emailManagement;
+    EditText email, password;
+    Button addEmail;
+    AlertDialog dialogBox;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +72,49 @@ public class AddMeetingActivity extends AppCompatActivity {
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, committees);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         committee.setAdapter(dataAdapter);
+
+        emailManagement = new EmailManagement(this);
+        if(emailManagement.getSenderEmail().equals("") || emailManagement.getSenderPassword().equals("")){
+            showEmailDialogBox();
+        }
+    }
+
+    private void showEmailDialogBox() {
+        dialogBox = new AlertDialog.Builder(this).create();
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View dialogView = inflater.inflate(R.layout.custom_email_dialog, null);
+
+        email = dialogView.findViewById(R.id.email);
+        password = dialogBox.findViewById(R.id.password);
+        addEmail = dialogView.findViewById(R.id.addEmail);
+
+        DialogBoxListener handler = new DialogBoxListener();
+        addEmail.setOnClickListener(handler);
+        dialogBox.setView(dialogView);
+        dialogBox.show();
+    }
+
+    private class DialogBoxListener implements View.OnClickListener{
+
+        @Override
+        public void onClick(View v) {
+
+            if(v.getId() == addEmail.getId()){
+                if(email.getText().toString().equals("") || password.getText().toString().equals("")){
+                    Toast.makeText(getApplicationContext(), "Please Enter Required Details", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()) {
+                        emailManagement.setSenderEmail(email.getText().toString());
+                        emailManagement.setSenderPassword(password.getText().toString());
+                        emailManagement.saveEmailPreferences(getApplicationContext());
+                        Toast.makeText(getApplicationContext(), "Successfully Added", Toast.LENGTH_SHORT).show();
+                        dialogBox.dismiss();
+                    }else {
+                        email.setError("Not Valid");
+                    }
+                }
+            }
+        }
     }
 
     public void OpenDatePicker(View view) {
@@ -145,20 +199,36 @@ public class AddMeetingActivity extends AppCompatActivity {
                 dbManager.addMeeting(meetingManagement);
 
                 Toast.makeText(getApplicationContext(), "Successfully Added", Toast.LENGTH_SHORT).show();
-                clear();
 
-                String idList = dbManager.getAllCommitteeMember(committee_id);
-                String[] ids = idList.split(",");
-                String email = "";
-                for (int i =0; i<ids.length;i++){
-                    if (!ids[i].equals("")) {
-                        if (i == 0)
-                            email = dbManager.getEmail(ids[i]);
-                        else
-                            email = email + "," + dbManager.getEmail(ids[i]);
+                try {
+                    String idList = dbManager.getAllCommitteeMember(committee_id);
+                    String[] ids = idList.split(",");
+                    String email = "";
+                    for (int i =0; i<ids.length;i++){
+                        if (!ids[i].equals("")) {
+                            if (i == 0)
+                                email = dbManager.getEmail(ids[i]);
+                            else
+                                email = email + "," + dbManager.getEmail(ids[i]);
+                        }
                     }
+
+                    String body="Dear Member," +
+                            "%3C%2Fbr%3E" +
+                            "%3C%2Fbr%3E" +
+                            "You have a meeting for " + meetingAgenda + "%3C%2Fbr%3E%3C%2Fbr%3E" +
+                            "Date: " + date_of_meeting + "%3C%2Fbr%3E%3C%2Fbr%3E" +
+                            "Time: " + time_of_meeting + "%3C%2Fbr%3E%3C%2Fbr%3E" +
+                            "Address: " + address + "%3C%2Fbr%3E%3C%2Fbr%3E" +
+                            "Note: " + meetingNote + "%3C%2Fbr%3E%3C%2Fbr%3E" +
+                            "Thank You.";
+                    new BackgroundEmailSenderClass(getApplicationContext(), title +" Meeting", body, email).execute(); }
+                catch (Exception ex) {
+                    Toast.makeText(getApplicationContext(), "Email Not Sent Successfully", Toast.LENGTH_SHORT).show();
                 }
-                sendEmail(email,title, date_of_meeting, time_of_meeting, address,meetingAgenda, meetingNote);
+                //sendEmail(email,title, date_of_meeting, time_of_meeting, address,meetingAgenda, meetingNote);
+
+                clear();
 
             }catch (Exception e){
                 Toast.makeText(getApplicationContext(),"Insert Valid Inputs",Toast.LENGTH_SHORT).show();
@@ -166,7 +236,7 @@ public class AddMeetingActivity extends AppCompatActivity {
         }
     }
 
-    public void sendEmail(String email, String title, String Date, String Time, String Add, String Agenda, String Note){
+/*    public void sendEmail(String email, String title, String Date, String Time, String Add, String Agenda, String Note){
         String subject= title + " Meeting";
         String body="Dear Member," +
                 "%3C%2Fbr%3E" +
@@ -183,7 +253,7 @@ public class AddMeetingActivity extends AppCompatActivity {
         Intent emailIntent = new Intent(Intent.ACTION_VIEW);
         emailIntent.setData(Uri.parse(mailTo));
         startActivity(emailIntent);
-    }
+    }*/
 
     private void clear() {
         meetingTitle.setText("");
