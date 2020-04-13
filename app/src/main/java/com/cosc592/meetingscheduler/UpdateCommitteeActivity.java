@@ -1,3 +1,4 @@
+//to update the committee
 package com.cosc592.meetingscheduler;
 
 import android.content.Intent;
@@ -5,23 +6,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.Calendar;
-
 public class UpdateCommitteeActivity extends AppCompatActivity {
-
+    //Declarations
     EditText committeeTitle, committeeDescription, department;
     DatabaseManager dbManager = MainActivity.dbManager;
     boolean notNullCheck;
     Button update, cancel;
     String committeeId;
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_committee);
@@ -55,10 +51,9 @@ public class UpdateCommitteeActivity extends AppCompatActivity {
         update.setOnClickListener(handler);
         cancel.setOnClickListener(handler);
     }
-
+//updates changed fields
     public class ButtonHandler implements View.OnClickListener{
 
-        @Override
         public void onClick(View v) {
             if(v.getId() == cancel.getId()){
                 finish();
@@ -80,7 +75,7 @@ public class UpdateCommitteeActivity extends AppCompatActivity {
             }
         }
     }
-
+//checks if any values are not entered
     public void notNullChecking(){
         notNullCheck = true;
         if (committeeDescription.getText().toString().equals("")) {

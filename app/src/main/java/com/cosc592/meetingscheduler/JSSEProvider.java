@@ -1,8 +1,9 @@
+//for email implementation
 package com.cosc592.meetingscheduler;
 
 import java.security.AccessController;
 import java.security.Provider;
-
+// TSL and SSL implementations are done to access the email
 public class JSSEProvider extends Provider {
 
     public JSSEProvider() {

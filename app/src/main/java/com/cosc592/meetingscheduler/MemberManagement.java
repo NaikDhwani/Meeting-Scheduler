@@ -1,14 +1,11 @@
+//to manage the members
 package com.cosc592.meetingscheduler;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-
 public class MemberManagement {
-
+    //Declarations
     private String memberId, first_name, middle_name, last_name, address, city, state, country, email, date_of_birth, registration_date, contact_mobile, contact_residence, contact_office;
     int zip_code, is_alive;
-
+//constructors
     public MemberManagement (String memberId, String first_name, String middle_name, String last_name,
                              String address, int zip_code, String city, String state, String country,
                              String contact_mobile, String contact_residence, String contact_office, String email,
@@ -71,7 +68,7 @@ public class MemberManagement {
         this.last_name = String.valueOf(last_name.charAt(0)).toUpperCase() + last_name.substring(1);
         this.email = email;
     }
-
+//to get the required fields to add as a member
     public String getMemberId(){
         return memberId;
     }

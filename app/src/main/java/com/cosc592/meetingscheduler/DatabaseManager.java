@@ -1,3 +1,4 @@
+//database to store the entered values and perform operations
 package com.cosc592.meetingscheduler;
 
 import android.content.ContentValues;
@@ -5,7 +6,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.LinkedList;
@@ -41,7 +41,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(memberTable);
         db.execSQL(committeeTable);
@@ -49,7 +48,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db.execSQL(meetingTable);
     }
 
-    @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) { }
 
     //All Member List
@@ -69,7 +67,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db.close();
         return list;
     }
-
+// to manage the birthdays
     public LinkedList<MemberManagement> showAllBirthDayMember(){
         SQLiteDatabase db = getWritableDatabase();
         LinkedList<MemberManagement> list = new LinkedList<>();
@@ -89,7 +87,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db.close();
         return list;
     }
-
+//to search members
     public LinkedList<MemberManagement> searchMember(String searchText, int i){
         SQLiteDatabase db = getWritableDatabase();
         LinkedList<MemberManagement> list = new LinkedList<>();
@@ -117,7 +115,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db.close();
         return list;
     }
-
+//to sort members in the order
     public LinkedList<MemberManagement> sortMembers(int i){
         SQLiteDatabase db = getWritableDatabase();
         LinkedList<MemberManagement> list = new LinkedList<>();
@@ -299,7 +297,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db.delete(COMMITTEE_TABLE_NAME,"committee_id = ?",new String[]{committeeId});
         db.close();
     }
-
+//search committee
     public LinkedList<CommitteeManagement> searchCommittee(String searchText){
         SQLiteDatabase db = getWritableDatabase();
         LinkedList<CommitteeManagement> list = new LinkedList<>();
@@ -316,7 +314,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db.close();
         return list;
     }
-
+// to show all committee members
     public LinkedList<CommitteeMemberManagement> showAllCommitteeMember(){
         SQLiteDatabase db = getWritableDatabase();
         LinkedList<CommitteeMemberManagement> list = new LinkedList<>();
@@ -331,7 +329,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db.close();
         return list;
     }
-
+//get the committee members
     public String getAllCommitteeMember(int committeeId){
         SQLiteDatabase db = getWritableDatabase();
         String member_id ="";
@@ -343,7 +341,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db.close();
         return member_id;
     }
-
+// to get the member name
     public String getMemberName(String id){
         SQLiteDatabase db = getWritableDatabase();
         String memberName ="";
@@ -355,7 +353,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db.close();
         return memberName;
     }
-
+//if committee id is already present
     public boolean alreadyExist(int committeeId){
         SQLiteDatabase db = getWritableDatabase();
         Cursor cursor = db.rawQuery("select * from " + COMMITTEE_MEMBER_TABLE_NAME +" where committee_id = " + committeeId, null);
@@ -363,7 +361,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
             return false;
         return true;
     }
-
+//member of the committee
     public boolean isMember(int committeeId){
         SQLiteDatabase db = getWritableDatabase();
         Cursor cursor = db.rawQuery("select member_id from " + COMMITTEE_MEMBER_TABLE_NAME +" where committee_id = " + committeeId, null);
@@ -376,7 +374,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         else
             return true;
     }
-
+//already present member
     public boolean alreadyExistMember(String memberId){
         SQLiteDatabase db = getWritableDatabase();
         Cursor cursor = db.rawQuery("select * from " + COMMITTEE_MEMBER_TABLE_NAME +" where member_id LIKE'" + '%' + memberId + '%' + "'", null);
@@ -384,7 +382,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
             return false;
         return true;
     }
-
+//to get committee list
     public LinkedList<CommitteeMemberManagement> getCommitteeList(){
         SQLiteDatabase db = getWritableDatabase();
         LinkedList<CommitteeMemberManagement> list = new LinkedList<>();
@@ -445,7 +443,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db.close();
         return list;
     }
-
+//to search meeting
     public LinkedList<MeetingManagement> searchMeeting(String searchText, int i){
         SQLiteDatabase db = getWritableDatabase();
         LinkedList<MeetingManagement> list = new LinkedList<>();
@@ -521,7 +519,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db.insert(MEETING_TABLE_NAME,null,row);
         db.close();
     }
-
+//to get email
     public String getEmail(String memberId) {
         SQLiteDatabase db = getWritableDatabase();
         String Email ="";

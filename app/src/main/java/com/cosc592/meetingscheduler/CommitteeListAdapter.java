@@ -1,3 +1,4 @@
+//to manage committee list
 package com.cosc592.meetingscheduler;
 
 import android.content.Context;
@@ -8,12 +9,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.LinkedList;
 import java.util.List;
 
 public class CommitteeListAdapter extends BaseAdapter {
-
+    //Declarations
     private LayoutInflater layoutInflater;
     private List<CommitteeManagement> committeeList;
     TextView committeeNameText, departmentText;
@@ -21,29 +21,24 @@ public class CommitteeListAdapter extends BaseAdapter {
     DatabaseManager dbManager = MainActivity.dbManager;
     static Context con;
 
-
     public CommitteeListAdapter(Context context, List<CommitteeManagement> committeeList) {
         layoutInflater =LayoutInflater.from(context);
         this.committeeList = committeeList;
         this.con = context;
     }
-
-    @Override
+    // to get how many committees are present
     public int getCount() {
         return committeeList.size();
     }
-
-    @Override
+    //to know exact committee list
     public Object getItem(int position) {
         return committeeList.get(position);
     }
-
-    @Override
+    //index position
     public long getItemId(int position) {
         return position;
     }
-
-    @Override
+// to view all data in the committee
     public View getView(int position, View convertView, ViewGroup parent) {
 
             if (convertView == null) {
@@ -69,7 +64,7 @@ public class CommitteeListAdapter extends BaseAdapter {
             }
         return convertView;
     }
-
+//when clicked on edit, delete to perform required operations
     private class ButtonHandler implements View.OnClickListener {
 
         private int rowNumber;
@@ -78,7 +73,6 @@ public class CommitteeListAdapter extends BaseAdapter {
             this.rowNumber = rowNumber;
         }
 
-        @Override
         public void onClick(View v) {
             CommitteeManagement committeeManagement = committeeList.get(rowNumber);
             if (v.getId() == editCommittee.getId())

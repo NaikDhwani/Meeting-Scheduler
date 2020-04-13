@@ -1,3 +1,4 @@
+//to manage the members
 package com.cosc592.meetingscheduler;
 
 import android.content.Context;
@@ -16,15 +17,13 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
 import java.util.LinkedList;
 
 public class MemberActivity extends AppCompatActivity {
-
+    //Declarations
     ImageButton addMember, sortMember;
     Intent newActivity;
     static MemberListAdapter memberAdapter;
@@ -36,7 +35,6 @@ public class MemberActivity extends AppCompatActivity {
     static EditText loginKey, searchMember;
     static LoginManagement loginManagement;
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_member);
@@ -62,14 +60,12 @@ public class MemberActivity extends AppCompatActivity {
         updateView();
     }
 
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
 
-    @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         if(Build.VERSION.SDK_INT > 11) {
             invalidateOptionsMenu();
@@ -78,7 +74,6 @@ public class MemberActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
          /*Handle action bar item clicks here. The action bar will
          automatically handle clicks on the Home/Up button, so long
@@ -139,14 +134,13 @@ public class MemberActivity extends AppCompatActivity {
         dialogBox.setView(dialogView);
         dialogBox.show();
     }
-
+//when clicked deletes the member, after key is entered
     public class DialogBoxListener implements View.OnClickListener{
         private String id;
         public DialogBoxListener(String memberId){
             this.id = memberId;
         }
 
-        @Override
         public void onClick(View v) {
 
             if(v.getId() == cancel.getId()){
@@ -163,7 +157,7 @@ public class MemberActivity extends AppCompatActivity {
             }
         }
     }
-
+//to sort the members based on the requirement
     public void Sort(View view) {
         PopupMenu popup = new PopupMenu(c, sortMember);
         popup.getMenuInflater().inflate(R.menu.member_sorting, popup.getMenu());
@@ -189,7 +183,7 @@ public class MemberActivity extends AppCompatActivity {
         });
         popup.show();
     }
-
+//to search members
     public void searchOptions(View view) {
         PopupMenu popup = new PopupMenu(c, searchMember);
         popup.getMenuInflater().inflate(R.menu.member_searching, popup.getMenu());
@@ -213,16 +207,13 @@ public class MemberActivity extends AppCompatActivity {
         });
         popup.show();
     }
-
+//based on the entered characters, displays members
     public class EditActionListener implements TextWatcher {
 
-        @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
 
-        @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) { }
 
-        @Override
         public void afterTextChanged(Editable s) {
             if (searchMember.getText().toString().equals(""))
                 updateView();

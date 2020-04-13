@@ -1,3 +1,4 @@
+//to manage the meeting
 package com.cosc592.meetingscheduler;
 
 import android.content.Context;
@@ -15,15 +16,13 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
 import java.util.LinkedList;
 
 public class MeetingActivity extends AppCompatActivity {
-
+    //Declaration
     Intent newActivity;
     MeetingListAdapter meetingAdapter;
     DatabaseManager dbManager = MainActivity.dbManager;
@@ -34,7 +33,6 @@ public class MeetingActivity extends AppCompatActivity {
     static LoginManagement loginManagement;
     static ListView meetingList;
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meeting);
@@ -56,14 +54,11 @@ public class MeetingActivity extends AppCompatActivity {
         updateView();
     }
 
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
-
-    @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         if(Build.VERSION.SDK_INT > 11) {
             invalidateOptionsMenu();
@@ -72,7 +67,6 @@ public class MeetingActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
          /*Handle action bar item clicks here. The action bar will
          automatically handle clicks on the Home/Up button, so long
@@ -95,7 +89,7 @@ public class MeetingActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
+//to add the meeting
     public void Add(View view) {
         LinkedList<CommitteeMemberManagement> list = dbManager.showAllCommitteeMember();
         if (list.size()<1){
@@ -105,20 +99,20 @@ public class MeetingActivity extends AppCompatActivity {
             startActivity(newActivity);
         }
     }
-
+//to view the meetings
     private void updateView(){
         LinkedList<MeetingManagement> list = dbManager.showAllMeeting();
         meetingList.removeAllViewsInLayout();
         meetingAdapter = new MeetingListAdapter(c, list);
         meetingList.setAdapter(meetingAdapter);
     }
-
+//to update the meeting
     public void Update(int meeting_id) {
         newActivity = new Intent(c, UpdateMeetingActivity.class);
         newActivity.putExtra("meetingId", meeting_id);
         c.startActivity(newActivity);
     }
-
+//shows dialog box, to enter login key to delete the meeting
     public void showDialogBox(int meeting_id) {
         dialogBox = new AlertDialog.Builder(c).create();
         LayoutInflater inflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -134,14 +128,13 @@ public class MeetingActivity extends AppCompatActivity {
         dialogBox.setView(dialogView);
         dialogBox.show();
     }
-
+//when entered key, if it's correct deletes the meeting
     private class DialogBoxListener implements View.OnClickListener{
         private int id;
         public DialogBoxListener(int meeting_id){
             this.id = meeting_id;
         }
 
-        @Override
         public void onClick(View v) {
 
             if(v.getId() == cancel.getId()){
@@ -156,7 +149,7 @@ public class MeetingActivity extends AppCompatActivity {
             }
         }
     }
-
+//search options for meeting
     public void searchOptions(View view) {
         PopupMenu popup = new PopupMenu(c, searchMeeting);
         popup.getMenuInflater().inflate(R.menu.meeting_searching, popup.getMenu());
@@ -180,15 +173,13 @@ public class MeetingActivity extends AppCompatActivity {
         });
         popup.show();
     }
-
+//when ever if a character is entered, if there are any records displays those meetings
     public class EditActionListener implements TextWatcher {
-        @Override
+
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
-        @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {}
 
-        @Override
         public void afterTextChanged(Editable s) {
 
             if (searchMeeting.getText().toString().equals(""))

@@ -30,6 +30,10 @@
         <activity android:name=".AddCommitteeActivity" />
         <activity android:name=".AddMeetingActivity" />
         <activity android:name=".AddMemberActivity" />
+        <activity android:name=".UpdateMemberActivity" />
+        <activity android:name=".UpdateCommitteeActivity" />
+        <activity android:name=".UpdateMeetingActivity" />
+        <activity android:name=".ViewMemberActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,3 +1,4 @@
+//to access the committee
 package com.cosc592.meetingscheduler;
 
 import android.content.Context;
@@ -14,15 +15,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
 import java.util.LinkedList;
 
 public class CommitteeActivity extends AppCompatActivity {
-
+    //Declarations
     Intent newActivity;
     CommitteeListAdapter committeeAdapter;
     DatabaseManager dbManager = MainActivity.dbManager;
@@ -33,7 +32,6 @@ public class CommitteeActivity extends AppCompatActivity {
     static LoginManagement loginManagement;
     static ListView committeeList;
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_committee);
@@ -56,14 +54,12 @@ public class CommitteeActivity extends AppCompatActivity {
         updateView();
     }
 
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
 
-    @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         if(Build.VERSION.SDK_INT > 11) {
             invalidateOptionsMenu();
@@ -72,7 +68,6 @@ public class CommitteeActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
          /*Handle action bar item clicks here. The action bar will
          automatically handle clicks on the Home/Up button, so long
@@ -95,25 +90,25 @@ public class CommitteeActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
+// when clicked on add, goes to add committee class
     public void Add(View view) {
         newActivity = new Intent(this, AddCommitteeActivity.class);
         startActivity(newActivity);
     }
-
+// to update the list in the database
     private void updateView(){
         LinkedList<CommitteeManagement> list = dbManager.showAllCommittee();
         committeeList.removeAllViewsInLayout();
         committeeAdapter = new CommitteeListAdapter(c, list);
         committeeList.setAdapter(committeeAdapter);
     }
-
+    // when clicked on update
     public void Update(String committeeId) {
         newActivity = new Intent(c, UpdateCommitteeActivity.class);
         newActivity.putExtra("committeeId", committeeId);
         c.startActivity(newActivity);
     }
-
+//shows dialog box, to enter login key - if you are trying to delete
     public void showDialogBox(String committeeId) {
         dialogBox = new AlertDialog.Builder(c).create();
         LayoutInflater inflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -129,21 +124,20 @@ public class CommitteeActivity extends AppCompatActivity {
         dialogBox.setView(dialogView);
         dialogBox.show();
     }
-
+// view member
     public void ViewMember(int committee_id, String title) {
         newActivity = new Intent(c, ViewMemberActivity.class);
         newActivity.putExtra("committee_id", committee_id);
         newActivity.putExtra("title", title);
         c.startActivity(newActivity);
     }
-
+// when clicked on the dialog box
     public class DialogBoxListener implements View.OnClickListener{
         private String id;
         public DialogBoxListener(String committeeId){
             this.id = committeeId;
         }
 
-        @Override
         public void onClick(View v) {
 
             if(v.getId() == cancel.getId()){
@@ -159,16 +153,13 @@ public class CommitteeActivity extends AppCompatActivity {
             }
         }
     }
-
+//while searching
     public class EditActionListener implements TextWatcher {
 
-        @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
 
-        @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) { }
 
-        @Override
         public void afterTextChanged(Editable s) {
             if (searchCommittee.getText().toString().equals(""))
                 updateView();

@@ -1,3 +1,4 @@
+//to update the members
 package com.cosc592.meetingscheduler;
 
 import android.app.DatePickerDialog;
@@ -13,15 +14,13 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
 public class UpdateMemberActivity extends AppCompatActivity {
-
+    //Declarations
     EditText firstName, middleName, lastName, address, zipCode, city, state, country,email, personalContact, officeContact, resContact, birthDate;
     CheckBox alive;
     Button update, cancel;
@@ -30,7 +29,6 @@ public class UpdateMemberActivity extends AppCompatActivity {
     boolean notNullCheck , validation;
     final Calendar calendar = Calendar.getInstance();
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_member);
@@ -95,10 +93,9 @@ public class UpdateMemberActivity extends AppCompatActivity {
         update.setOnClickListener(handler);
         cancel.setOnClickListener(handler);
     }
-
+//updates the fields accordingly
     public class ButtonHandler implements View.OnClickListener{
 
-        @Override
         public void onClick(View v) {
             if(v.getId() == cancel.getId()){
                 finish();
@@ -141,63 +138,55 @@ public class UpdateMemberActivity extends AppCompatActivity {
             }
         }
     }
-
+//checks if email is valid or not
     public void validation() {
         validation = true;
         if (!Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()) {
             validation = false;
             email.setError("Invalid");
         }
-
         if (personalContact.getText().toString().length() < 10) {
             validation = false;
             personalContact.setError("Invalid");
         }
     }
-
+// checks is any of the fields are empty
     public void notNullChecking(){
         notNullCheck = true;
         if (address.getText().toString().equals("")) {
             address.setError("Required");
             notNullCheck =false;
         }
-
         if (zipCode.getText().toString().equals("")) {
             zipCode.setError("Required");
             notNullCheck =false;
         }
-
         if (city.getText().toString().equals("")) {
             city.setError("Required");
             notNullCheck =false;
         }
-
         if (state.getText().toString().equals("")) {
             state.setError("Required");
             notNullCheck =false;
         }
-
         if (country.getText().toString().equals("")) {
             country.setError("Required");
             notNullCheck =false;
         }
-
         if (email.getText().toString().equals("")) {
             email.setError("Required");
             notNullCheck =false;
         }
-
         if (personalContact.getText().toString().equals("")) {
             personalContact.setError("Required");
             notNullCheck =false;
         }
-
         if (birthDate.getText().toString().equals("")) {
             birthDate.setError("Required");
             notNullCheck =false;
         }
     }
-
+//to pick the date for dob
     public void OpenDatePicker(View view) {
         closeKeyBoard();
         DatePickerDialog datePicker = new DatePickerDialog(this, date, Integer.valueOf(dateOfBirth.substring(6)),
@@ -207,7 +196,6 @@ public class UpdateMemberActivity extends AppCompatActivity {
         //datePicker.updateDate(Integer.valueOf(dateOfBirth.substring(6)), Integer.valueOf(dateOfBirth.substring(0,2))-1, Integer.valueOf(dateOfBirth.substring(3,5)));
         datePicker.show();
     }
-
     DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -217,13 +205,12 @@ public class UpdateMemberActivity extends AppCompatActivity {
             birthDate();
         }
     };
-
+// to convert to format
     private void birthDate() {
         String dateFormat = "MM/dd/yyyy";
         SimpleDateFormat sdf = new SimpleDateFormat(dateFormat, Locale.US);
         birthDate.setText(sdf.format(calendar.getTime()));
     }
-
     //Method to close keyboard onClick
     private void closeKeyBoard(){
         View view = this.getCurrentFocus();

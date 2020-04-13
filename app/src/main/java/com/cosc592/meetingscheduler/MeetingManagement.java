@@ -1,10 +1,11 @@
+//to manage the meetings
 package com.cosc592.meetingscheduler;
 
 public class MeetingManagement {
-
+    //Declarations
     private String  title, address, city, state, country, data_time, agenda, note, committeeName;
     private int committee_id, meeting_id, zip_code, is_active;
-
+//constructors
     public MeetingManagement(int committee_id, String title, String address, int zip_code, String city, String state, String country,
                              String data_time, int is_active, String agenda, String note) {
         this.committee_id = committee_id;
@@ -19,13 +20,11 @@ public class MeetingManagement {
         this.zip_code = zip_code;
         this.is_active = is_active;
     }
-
     public MeetingManagement(int meeting_id, String title, String name) {
         this.meeting_id = meeting_id;
         this.title = title;
         this.committeeName = name;
     }
-
     public MeetingManagement(int meetingId, int committee_id, String address, int zip_code, String city, String state, String country,
                              String data_time, int is_active, String agenda, String note) {
         this.committee_id = committee_id;
@@ -40,7 +39,7 @@ public class MeetingManagement {
         this.is_active = is_active;
         this.meeting_id = meetingId;
     }
-
+// to get the fields required to set the meeting
     public int getCommittee_id() {
         return committee_id;
     }

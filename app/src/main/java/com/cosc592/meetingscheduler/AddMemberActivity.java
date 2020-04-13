@@ -1,3 +1,4 @@
+// to add members to the database
 package com.cosc592.meetingscheduler;
 
 import android.app.DatePickerDialog;
@@ -10,25 +11,22 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
 public class AddMemberActivity extends AppCompatActivity {
-
+    //Declarations
     final Calendar calendar = Calendar.getInstance();
     EditText firstName, middleName, lastName, address, zipCode, city, state, country, email, personalContact, officeContact, resContact, birthDate;
     DatabaseManager dbManager = MainActivity.dbManager;
     boolean notNullCheck, validation;
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_member);
-
+        //accessed from xml
         firstName = findViewById(R.id.firstName);
         middleName = findViewById(R.id.middleName);
         lastName = findViewById(R.id.lastName);
@@ -43,15 +41,15 @@ public class AddMemberActivity extends AppCompatActivity {
         resContact = findViewById(R.id.resContact);
         birthDate = findViewById(R.id.birthDate);
     }
-
+//when clicked on back, goes back to the main page of member activity
     public void Back(View view) {
         finish();
     }
-
+//to clear the values
     public void Clear(View view) {
         clear();
     }
-
+//when clicked on add, adds member to the database
     public void Add(View view) {
         notNullChecking();
         validation();
@@ -103,20 +101,19 @@ public class AddMemberActivity extends AppCompatActivity {
             }
         }
     }
-
+//checks for valid email id
     public void validation() {
         validation = true;
         if (!Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()) {
             validation = false;
             email.setError("Invalid");
         }
-
         if (personalContact.getText().toString().length() < 10) {
             validation = false;
             personalContact.setError("Invalid");
         }
     }
-
+//clears the values entered
     public void clear(){
         firstName.setText("");
         middleName.setText("");
@@ -132,60 +129,51 @@ public class AddMemberActivity extends AppCompatActivity {
         resContact.setText("");
         birthDate.setText("");
     }
-
+//checks if any of the fields are not entered
     public void notNullChecking(){
         notNullCheck = true;
         if (firstName.getText().toString().equals("")) {
             firstName.setError("Required");
             notNullCheck = false;
         }
-
         if (lastName.getText().toString().equals("")) {
             lastName.setError("Required");
             notNullCheck =false;
         }
-
         if (address.getText().toString().equals("")) {
             address.setError("Required");
             notNullCheck =false;
         }
-
         if (zipCode.getText().toString().equals("")) {
             zipCode.setError("Required");
             notNullCheck =false;
         }
-
         if (city.getText().toString().equals("")) {
             city.setError("Required");
             notNullCheck =false;
         }
-
         if (state.getText().toString().equals("")) {
             state.setError("Required");
             notNullCheck =false;
         }
-
         if (country.getText().toString().equals("")) {
             country.setError("Required");
             notNullCheck =false;
         }
-
         if (email.getText().toString().equals("")) {
             email.setError("Required");
             notNullCheck =false;
         }
-
         if (personalContact.getText().toString().equals("")) {
             personalContact.setError("Required");
             notNullCheck =false;
         }
-
         if (birthDate.getText().toString().equals("")) {
             birthDate.setError("Required");
             notNullCheck =false;
         }
     }
-
+// to pick the date for dob
     public void OpenDatePicker(View view) {
         closeKeyBoard();
         DatePickerDialog datePicker = new DatePickerDialog(this, date, calendar
@@ -194,7 +182,6 @@ public class AddMemberActivity extends AppCompatActivity {
         datePicker.getDatePicker().setMaxDate(System.currentTimeMillis() - 1000);
         datePicker.show();
     }
-
     DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -204,7 +191,7 @@ public class AddMemberActivity extends AppCompatActivity {
             birthDate();
         }
     };
-
+//converts to the format
     private void birthDate() {
         String dateFormat = "MM/dd/yyyy";
         SimpleDateFormat sdf = new SimpleDateFormat(dateFormat, Locale.US);

@@ -1,3 +1,4 @@
+//to view the members
 package com.cosc592.meetingscheduler;
 
 import android.content.Context;
@@ -9,13 +10,11 @@ import android.widget.AutoCompleteTextView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import java.util.LinkedList;
 
 public class ViewMemberActivity extends AppCompatActivity {
-
+    //Declarations
     AutoCompleteTextView searchMember;
     static LinkedList<MemberManagement> list;
     static MemberManagement memberManagement;
@@ -28,7 +27,6 @@ public class ViewMemberActivity extends AppCompatActivity {
     static CommitteeMemberListAdapter cmAdapter;
     static String[] ids;
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_member);
@@ -57,12 +55,11 @@ public class ViewMemberActivity extends AppCompatActivity {
         searchMember.setAdapter(dataAdapter);
     }
 
-    @Override
     protected void onStart() {
         super.onStart();
         updateView();
     }
-
+//to view the members
     private void updateView() {
         if(dbManager.isMember(committeeId) == true) {
             idList = dbManager.getAllCommitteeMember(committeeId);
@@ -76,11 +73,11 @@ public class ViewMemberActivity extends AppCompatActivity {
             cmList.removeAllViewsInLayout();
         }
     }
-
+//when clicked on back, goes to the main page of the activity
     public void Back(View view) {
         finish();
     }
-
+//adds member to the database
     public void Add(View view) {
 
         if (list.size() > 0){
@@ -90,7 +87,6 @@ public class ViewMemberActivity extends AppCompatActivity {
                     memberId = memberManagement.getMemberId();
             }
         }
-
         if (dbManager.alreadyExist(committeeId) == false){
             //add
             CommitteeMemberManagement cm = new CommitteeMemberManagement(committeeId,memberId);
@@ -112,7 +108,7 @@ public class ViewMemberActivity extends AppCompatActivity {
             }
         }
     }
-
+//to update member fields
     public void Update(String idList){
         CommitteeMemberManagement cm = new CommitteeMemberManagement(committeeId,idList);
         dbManager.updateCommitteeMember(cm);

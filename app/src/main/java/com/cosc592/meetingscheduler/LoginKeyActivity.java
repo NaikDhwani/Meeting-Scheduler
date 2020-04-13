@@ -1,3 +1,4 @@
+//to access the key to login
 package com.cosc592.meetingscheduler;
 
 import android.content.Intent;
@@ -11,12 +12,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 public class LoginKeyActivity extends AppCompatActivity {
-
+    //Declaration
     Intent newActivity;
     LoginManagement loginManagement;
     EditText loginKeyEditText;
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_key);
@@ -30,14 +30,12 @@ public class LoginKeyActivity extends AppCompatActivity {
         loginKeyEditText.setText(loginManagement.getLoginKey());
     }
 
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
 
-    @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         if(Build.VERSION.SDK_INT > 11) {
             invalidateOptionsMenu();
@@ -46,7 +44,6 @@ public class LoginKeyActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
          /*Handle action bar item clicks here. The action bar will
          automatically handle clicks on the Home/Up button, so long
@@ -69,11 +66,11 @@ public class LoginKeyActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
+// when clicked on cancel, goes back
     public void Cancel(View view) {
         finish();
     }
-
+//to update the modified key value and go back
     public void Update(View view) {
         loginManagement.setLoginKey(loginKeyEditText.getText().toString());
         loginManagement.saveLoginKeyPreferences(this);

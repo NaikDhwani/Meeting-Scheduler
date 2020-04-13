@@ -1,3 +1,4 @@
+//to manage the meetings list
 package com.cosc592.meetingscheduler;
 
 import android.content.Context;
@@ -7,11 +8,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
 import java.util.List;
 
 public class MeetingListAdapter extends BaseAdapter {
-
+    //Declaration
     private LayoutInflater layoutInflater;
     private List<MeetingManagement> meetingList;
     TextView meetingNameText, committeeTitle;
@@ -21,23 +21,19 @@ public class MeetingListAdapter extends BaseAdapter {
         layoutInflater =LayoutInflater.from(context);
         this.meetingList = meetingList;
     }
-
-    @Override
+//to get the meetings list
     public int getCount() {
         return meetingList.size();
     }
 
-    @Override
     public Object getItem(int position) {
         return meetingList.get(position);
     }
 
-    @Override
     public long getItemId(int position) {
         return position;
     }
-
-    @Override
+//able to view all delete,edit options
     public View getView(int position, View convertView, ViewGroup parent) {
 
             if (convertView == null) {
@@ -61,7 +57,7 @@ public class MeetingListAdapter extends BaseAdapter {
             }
         return convertView;
     }
-
+//to edit the meeting
     private class ButtonHandler implements View.OnClickListener{
 
         private  int rowNumber;
@@ -69,8 +65,6 @@ public class MeetingListAdapter extends BaseAdapter {
         public ButtonHandler(int rowNumber){
             this.rowNumber = rowNumber;
         }
-
-        @Override
         public void onClick(View v) {
             MeetingManagement meetingManagement = meetingList.get(rowNumber);
             if(v.getId() == R.id.editMeeting)

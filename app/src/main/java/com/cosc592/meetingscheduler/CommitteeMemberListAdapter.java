@@ -1,3 +1,4 @@
+//To manage the committee members list
 package com.cosc592.meetingscheduler;
 
 import android.content.Context;
@@ -10,36 +11,32 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class CommitteeMemberListAdapter extends BaseAdapter {
-
+    //Declarations
     private LayoutInflater layoutInflater;
     private String[] ids;
     private String idList;
     TextView memberNameText;
     ImageButton deleteMember;
     DatabaseManager dbManager = MainActivity.dbManager;
-
+    //constructor
     public CommitteeMemberListAdapter(Context context, String[] ids, String idList) {
         layoutInflater =LayoutInflater.from(context);
         this.ids = ids;
         this.idList =idList;
     }
-
-    @Override
+//to get how many are present in each committee
     public int getCount() {
         return ids.length;
     }
-
-    @Override
+//position of each member
     public Object getItem(int position) {
         return ids[position];
     }
 
-    @Override
     public long getItemId(int position) {
         return position;
     }
-
-    @Override
+// what are displayed when members are added to the committee
     public View getView(int position, View convertView, ViewGroup parent) {
 
             if (convertView == null) {
@@ -61,7 +58,7 @@ public class CommitteeMemberListAdapter extends BaseAdapter {
             }
         return convertView;
     }
-
+//to delete the added members
     private class ButtonHandler implements View.OnClickListener{
 
         private  int rowNumber;
@@ -70,7 +67,6 @@ public class CommitteeMemberListAdapter extends BaseAdapter {
             this.rowNumber = rowNumber;
         }
 
-        @Override
         public void onClick(View v) {
             if(v.getId() == deleteMember.getId()) {
                 Log.d("before", idList);

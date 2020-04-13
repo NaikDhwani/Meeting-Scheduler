@@ -1,3 +1,4 @@
+//to manage the members list
 package com.cosc592.meetingscheduler;
 
 import android.content.Context;
@@ -7,11 +8,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
 import java.util.List;
 
 public class MemberListAdapter extends BaseAdapter {
-
+    //Declarations
     private LayoutInflater layoutInflater;
     private List<MemberManagement> memberList;
     TextView memberNameText, memberIdText;
@@ -21,23 +21,19 @@ public class MemberListAdapter extends BaseAdapter {
         layoutInflater =LayoutInflater.from(context);
         this.memberList = memberList;
     }
-
-    @Override
+//to get the list of memebers
     public int getCount() {
         return memberList.size();
     }
 
-    @Override
     public Object getItem(int position) {
         return memberList.get(position);
     }
 
-    @Override
     public long getItemId(int position) {
         return position;
     }
-
-    @Override
+//to view edit,delete,search options
     public View getView(int position, View convertView, ViewGroup parent) {
 
             if (convertView == null) {
@@ -61,7 +57,7 @@ public class MemberListAdapter extends BaseAdapter {
             }
         return convertView;
     }
-
+//when clicked on specific operations, works accordingly
     private class ButtonHandler implements View.OnClickListener{
 
         private  int rowNumber;
@@ -69,8 +65,6 @@ public class MemberListAdapter extends BaseAdapter {
         public ButtonHandler (int rowNumber){
             this.rowNumber = rowNumber;
         }
-
-        @Override
         public void onClick(View v) {
             MemberManagement memberManagement = memberList.get(rowNumber);
             if (v.getId() == editMember.getId())
