@@ -220,10 +220,4 @@ public class UpdateMemberActivity extends AppCompatActivity {
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
-
-    @Override
-    protected void onPause() {
-        finish();
-        super.onPause();
-    }
 }

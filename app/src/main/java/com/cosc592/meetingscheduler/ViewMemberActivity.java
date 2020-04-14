@@ -114,10 +114,4 @@ public class ViewMemberActivity extends AppCompatActivity {
         dbManager.updateCommitteeMember(cm);
         updateView();
     }
-
-    @Override
-    protected void onPause() {
-        finish();
-        super.onPause();
-    }
 }

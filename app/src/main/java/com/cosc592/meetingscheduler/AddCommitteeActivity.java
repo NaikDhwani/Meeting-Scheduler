@@ -78,10 +78,4 @@ public class AddCommitteeActivity extends AppCompatActivity {
         committeeDescription.setText("");
         committeeInstitute.setText("");
     }
-
-    @Override
-    protected void onPause() {
-        finish();
-        super.onPause();
-    }
 }

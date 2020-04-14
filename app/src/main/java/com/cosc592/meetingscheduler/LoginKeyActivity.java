@@ -76,10 +76,4 @@ public class LoginKeyActivity extends AppCompatActivity {
         loginManagement.saveLoginKeyPreferences(this);
         finish();
     }
-
-    @Override
-    protected void onPause() {
-        finish();
-        super.onPause();
-    }
 }

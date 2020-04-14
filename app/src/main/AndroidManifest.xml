@@ -6,9 +6,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/app_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/app_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
@@ -27,14 +27,22 @@
             android:name=".LoginKeyActivity"
             android:label="@string/title_activity_login_key"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".AddCommitteeActivity" />
-        <activity android:name=".AddMeetingActivity" />
-        <activity android:name=".AddMemberActivity" />
-        <activity android:name=".UpdateMemberActivity" />
-        <activity android:name=".UpdateCommitteeActivity" />
-        <activity android:name=".UpdateMeetingActivity" />
-        <activity android:name=".ViewMemberActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".AddCommitteeActivity"
+            android:label="@string/title_activity_add_committee"/>
+        <activity android:name=".AddMeetingActivity"
+            android:label="@string/title_activity_add_meeting"/>
+        <activity android:name=".AddMemberActivity"
+            android:label="@string/title_activity_add_member"/>
+        <activity android:name=".UpdateMemberActivity"
+            android:label="@string/title_activity_update_member"/>
+        <activity android:name=".UpdateCommitteeActivity"
+            android:label="@string/title_activity_update_committee"/>
+        <activity android:name=".UpdateMeetingActivity"
+            android:label="@string/title_activity_update_meeting"/>
+        <activity android:name=".ViewMemberActivity"
+            android:label="@string/title_activity_view_member"/>
+        <activity android:name=".MainActivity"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
