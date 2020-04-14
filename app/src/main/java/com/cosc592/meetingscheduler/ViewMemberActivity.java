@@ -66,7 +66,7 @@ public class ViewMemberActivity extends AppCompatActivity {
             ids = idList.split(",");
             if (ids.length > 0) {
                 cmList.removeAllViewsInLayout();
-                cmAdapter = new CommitteeMemberListAdapter(c, ids, idList);
+                cmAdapter = new CommitteeMemberListAdapter(c, ids, idList, committeeId);
                 cmList.setAdapter(cmAdapter);
             }
         }else{
@@ -113,5 +113,11 @@ public class ViewMemberActivity extends AppCompatActivity {
         CommitteeMemberManagement cm = new CommitteeMemberManagement(committeeId,idList);
         dbManager.updateCommitteeMember(cm);
         updateView();
+    }
+
+    @Override
+    protected void onPause() {
+        finish();
+        super.onPause();
     }
 }

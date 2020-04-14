@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.widget.Toast;
+
 // AsyncTask allows automatic execution of methods(onPreExecute,doInBackground,onPostExecute) while this class is called
 public class BackgroundEmailSenderClass extends AsyncTask<Void, Void, Void> {
     //Declaration
@@ -14,6 +15,7 @@ public class BackgroundEmailSenderClass extends AsyncTask<Void, Void, Void> {
     static Context context;
     EmailManagement emailManagement;
     GMailSender sender;
+
     //constructor
     public BackgroundEmailSenderClass(Context context, String subject, String body, String recipients) {
         this.context = context;
@@ -26,10 +28,12 @@ public class BackgroundEmailSenderClass extends AsyncTask<Void, Void, Void> {
         this.body = body;
         this.recipients = recipients;
     }
+
     //executes as soon as class is called
     protected void onPreExecute() {
         super.onPreExecute();
     }
+
     //runs in background when class is called
     protected Void doInBackground(Void... mApi) {
         try {
@@ -40,6 +44,7 @@ public class BackgroundEmailSenderClass extends AsyncTask<Void, Void, Void> {
         }
         return null;
     }
+
     //After background is executed, whether it is success is displayed
     protected void onPostExecute(Void result) {
         super.onPostExecute(result);

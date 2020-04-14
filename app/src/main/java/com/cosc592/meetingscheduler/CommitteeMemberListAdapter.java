@@ -15,14 +15,16 @@ public class CommitteeMemberListAdapter extends BaseAdapter {
     private LayoutInflater layoutInflater;
     private String[] ids;
     private String idList;
+    private int committeeId;
     TextView memberNameText;
     ImageButton deleteMember;
     DatabaseManager dbManager = MainActivity.dbManager;
     //constructor
-    public CommitteeMemberListAdapter(Context context, String[] ids, String idList) {
+    public CommitteeMemberListAdapter(Context context, String[] ids, String idList, int committeeId) {
         layoutInflater =LayoutInflater.from(context);
         this.ids = ids;
         this.idList =idList;
+        this.committeeId = committeeId;
     }
 //to get how many are present in each committee
     public int getCount() {
@@ -73,6 +75,7 @@ public class CommitteeMemberListAdapter extends BaseAdapter {
                 if (rowNumber == 0) {
                     if (ids.length == 1){
                         idList = idList.replace(String.valueOf(ids[rowNumber]), "");
+                        dbManager.deleteCommitteeMember(String.valueOf(committeeId));
                     }else {
                         idList = idList.replace(ids[rowNumber]+",", "");
                     }

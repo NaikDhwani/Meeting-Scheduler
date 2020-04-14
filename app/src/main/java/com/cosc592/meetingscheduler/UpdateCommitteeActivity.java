@@ -83,4 +83,10 @@ public class UpdateCommitteeActivity extends AppCompatActivity {
             notNullCheck = false;
         }
     }
+
+    @Override
+    protected void onPause() {
+        finish();
+        super.onPause();
+    }
  }

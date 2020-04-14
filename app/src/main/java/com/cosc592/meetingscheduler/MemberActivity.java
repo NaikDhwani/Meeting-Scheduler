@@ -226,4 +226,10 @@ public class MemberActivity extends AppCompatActivity {
             }
         }
     }
+
+    @Override
+    protected void onPause() {
+        finish();
+        super.onPause();
+    }
 }

@@ -258,7 +258,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     public void addCommittee(CommitteeManagement committeeManagement){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues row = new ContentValues();
-        row.put("department", committeeManagement.getDescription());
+        row.put("department", committeeManagement.getDepartment());
         row.put("title", committeeManagement.getTitle());
         row.put("description", committeeManagement.getDescription());
         row.put("date", committeeManagement.getDate());

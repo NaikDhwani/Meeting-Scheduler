@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class AddCommitteeActivity extends AppCompatActivity {
+
     //Declarations
     final Calendar calendar = Calendar.getInstance();
     EditText committeeTitle, committeeDescription, committeeInstitute;
@@ -19,6 +20,7 @@ public class AddCommitteeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_committee);
+
         //accessing from xml
         committeeTitle = findViewById(R.id.committeeTitle);
         committeeDescription = findViewById(R.id.committeeDescription);
@@ -28,10 +30,12 @@ public class AddCommitteeActivity extends AppCompatActivity {
     public void Back(View view) {
         finish();
     }
+
 //clears the values filled
     public void Clear(View view) {
         clear();
     }
+
 //when clicked on add, the values entered will be added
     public void Add(View view) {
         notNullChecking();
@@ -40,9 +44,9 @@ public class AddCommitteeActivity extends AppCompatActivity {
                 SimpleDateFormat simpledateformat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
                 String title = committeeTitle.getText().toString();
                 String description = committeeDescription.getText().toString();
-                String institute = committeeInstitute.getText().toString();
+                String department = committeeInstitute.getText().toString();
 
-                CommitteeManagement committeeManagement = new CommitteeManagement(institute, title, description, simpledateformat.format(calendar.getTime()));
+                CommitteeManagement committeeManagement = new CommitteeManagement(department, title, description, simpledateformat.format(calendar.getTime()));
                 dbManager.addCommittee(committeeManagement);
                 Toast.makeText(getApplicationContext(), "Successfully Added", Toast.LENGTH_SHORT).show();
                 clear();
@@ -51,6 +55,7 @@ public class AddCommitteeActivity extends AppCompatActivity {
             }
         }
     }
+
 // checks if any of the values are not entered
     public void notNullChecking(){
         notNullCheck = true;
@@ -71,6 +76,12 @@ public class AddCommitteeActivity extends AppCompatActivity {
     public void clear(){
         committeeTitle.setText("");
         committeeDescription.setText("");
-        committeeInstitute.setSelection(0);
+        committeeInstitute.setText("");
+    }
+
+    @Override
+    protected void onPause() {
+        finish();
+        super.onPause();
     }
 }
