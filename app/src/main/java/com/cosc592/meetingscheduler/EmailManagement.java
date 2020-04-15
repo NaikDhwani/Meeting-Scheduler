@@ -13,6 +13,9 @@ public class EmailManagement {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         senderEmail = preferences.getString("EMAIL","");
         senderPassword = preferences.getString("PASSWORD", "");
+        /*senderEmail = "";
+        senderPassword = "";
+        saveEmailPreferences(context);*/
     }
 
     public String getSenderEmail() { // returns email

@@ -52,6 +52,7 @@ public class AddMeetingActivity extends AppCompatActivity {
         meetingTime = findViewById(R.id.meetingTime);
         agenda = findViewById(R.id.agenda);
         note = findViewById(R.id.note);
+
         // committee list available to add for the meetings
         list = dbManager.getCommitteeList();
         String[] committees = new String[list.size()+1];
@@ -62,15 +63,19 @@ public class AddMeetingActivity extends AppCompatActivity {
                 committees[i+1] = committeeMemberManagement.getCommitteeTitle();
             }
         }
+
         //committees present are present in the drop down, select the committee required for the meeting
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, committees);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         committee.setAdapter(dataAdapter);
+
+        //Email Dialog
         emailManagement = new EmailManagement(this);
         if(emailManagement.getSenderEmail().equals("") || emailManagement.getSenderPassword().equals("")){
             showEmailDialogBox(); // to send email
         }
     }
+
     // dialog box displays which asks for the sender email and password
     private void showEmailDialogBox() {
         dialogBox = new AlertDialog.Builder(this).create();
@@ -104,6 +109,7 @@ public class AddMeetingActivity extends AppCompatActivity {
             }
         }
     }
+
 // to pick the date
     public void OpenDatePicker(View view) {
         closeKeyBoard();
@@ -113,6 +119,7 @@ public class AddMeetingActivity extends AppCompatActivity {
         datePicker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
         datePicker.show();
     }
+
     DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -122,12 +129,14 @@ public class AddMeetingActivity extends AppCompatActivity {
             meetingDate();
         }
     };
+
 // after selected from date picker, converted to MM/dd/yy format of meeting date
     private void meetingDate() {
         String dateFormat = "MM/dd/yyyy";
         SimpleDateFormat sdf = new SimpleDateFormat(dateFormat, Locale.US);
         meetingDate.setText(sdf.format(meetingCalendar.getTime()));
     }
+
     // to pick the time
     public void OpenTimePicker(View view) {
         closeKeyBoard();
@@ -149,14 +158,17 @@ public class AddMeetingActivity extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat(dateFormat, Locale.US);
         meetingTime.setText(sdf.format(meetingCalendar.getTime()));
     }
+
 //when clicked on back button, goes to the main page of meeting
     public void Back(View view) {
         finish();
     }
+
 //to clear the filled details
     public void Clear(View view) {
         clear();
     }
+
 // adds the meeting to assigned committee and sends an email to all members in the selected committee
     public void Add(View view) {
         notNullChecking();
@@ -269,8 +281,8 @@ public class AddMeetingActivity extends AppCompatActivity {
             meetingDate.setError("Required");
             notNullCheck =false;
         }
-        if (meetingTitle.getText().toString().equals("")) {
-            meetingTitle.setError("Required");
+        if (meetingTime.getText().toString().equals("")) {
+            meetingTime.setError("Required");
             notNullCheck =false;
         }
         if (agenda.getText().toString().equals("")) {
